@@ -10,8 +10,8 @@ import java.util.UUID;
 public class Animal {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
   @Column(nullable = false)
   private String name;
@@ -38,11 +38,11 @@ public class Animal {
   private String sex;
 
   @ManyToOne
-  @JoinColumn(name = "id_father", nullable = true, referencedColumnName = "id")
+  @JoinColumn(name = "id_father", referencedColumnName = "id")
   private Animal father;
 
   @ManyToOne
-  @JoinColumn(name = "id_mother", nullable = true, referencedColumnName = "id")
+  @JoinColumn(name = "id_mother", referencedColumnName = "id")
   private Animal mother;
 
   @OneToMany(mappedBy = "father", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -68,11 +68,11 @@ public class Animal {
 
   // Getters e Setters
 
-  public UUID getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(UUID id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
