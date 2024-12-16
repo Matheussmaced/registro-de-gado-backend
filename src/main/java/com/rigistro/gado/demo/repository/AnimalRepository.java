@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.rigistro.gado.demo.entity.Animal;
 
 @Repository
-public interface AnimalRepository extends JpaRepository<Animal, UUID> {
+public interface AnimalRepository extends JpaRepository<Animal, Long> {
+  boolean existsByName(String name);
 }
