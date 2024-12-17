@@ -25,11 +25,26 @@ public class AnimalServiceImpl implements AnimalService {
     return animalRepository.findAll();
   }
 
+  public Animal findById(String id) {
+    var animalId = Long.parseLong(id);
+
+    return animalRepository.findById(animalId)
+        .orElseThrow(() -> new IllegalArgumentException("Animal not found with ID: " + id));
+  }
+
   @Override
   public Animal createAnimal(CreateAnimalDTO createAnimalDTO) {
 
     if (animalRepository.existsByName(createAnimalDTO.name())) {
       throw new IllegalArgumentException("An animal with this name already exists.");
+    }
+
+    if (animalRepository.existsByName(createAnimalDTO.RGD())) {
+      throw new IllegalArgumentException("An animal with this RGD already exists.");
+    }
+
+    if (animalRepository.existsByName(createAnimalDTO.serie())) {
+      throw new IllegalArgumentException("An animal with this SERIE already exists.");
     }
 
     Animal animal = new Animal();
@@ -49,4 +64,5 @@ public class AnimalServiceImpl implements AnimalService {
 
     return animalRepository.save(animal);
   }
+
 }

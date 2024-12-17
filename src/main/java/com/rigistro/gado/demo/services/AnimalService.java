@@ -12,5 +12,7 @@ public interface AnimalService {
 
   List<Animal> findAll();
 
+  Animal findById(String id);
+
   Animal createAnimal(CreateAnimalDTO createAnimalDTO);
 }
