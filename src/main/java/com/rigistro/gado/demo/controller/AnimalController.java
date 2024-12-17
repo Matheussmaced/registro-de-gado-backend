@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,6 +53,14 @@ public class AnimalController {
   public ResponseEntity<Animal> createAnimal(@RequestBody CreateAnimalDTO createAnimalDTO) {
     Animal savedAnimal = animalService.createAnimal(createAnimalDTO);
     return ResponseEntity.status(HttpStatus.CREATED).body(savedAnimal);
+  }
+
+  @DeleteMapping("/{id}")
+  @Operation(summary = "Deleta um animal", description = "Deleta um animal no banco de dados.")
+  public ResponseEntity<Void> deleteById(@PathVariable String id) {
+    animalService.delete(id);
+
+    return ResponseEntity.noContent().build();
   }
 
   @ExceptionHandler(IllegalArgumentException.class)

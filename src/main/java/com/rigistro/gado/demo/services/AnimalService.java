@@ -16,4 +16,6 @@ public interface AnimalService {
   Animal findById(String id);
 
   Animal createAnimal(CreateAnimalDTO createAnimalDTO);
+
+  void delete(String id);
 }

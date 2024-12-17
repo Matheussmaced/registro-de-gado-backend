@@ -13,6 +13,8 @@ import com.rigistro.gado.demo.entity.Animal;
 import com.rigistro.gado.demo.repository.AnimalRepository;
 import com.rigistro.gado.demo.services.AnimalService;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class AnimalServiceImpl implements AnimalService {
 
@@ -33,6 +35,17 @@ public class AnimalServiceImpl implements AnimalService {
 
     return animalRepository.findById(animalId)
         .orElseThrow(() -> new IllegalArgumentException("Animal not found with ID: " + id));
+  }
+
+  public void delete(String id) {
+    var animalId = Long.parseLong(id);
+    Animal animalToDelete;
+
+    animalToDelete = animalRepository.findById(animalId)
+        .orElseThrow(() -> new EntityNotFoundException("Animal not found"));
+
+    animalRepository.delete(animalToDelete);
+
   }
 
   @Override
