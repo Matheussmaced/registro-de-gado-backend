@@ -1,79 +1,52 @@
-package com.rigistro.gado.demo.entity;
+package com.rigistro.gado.demo.DTO;
 
-import jakarta.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.UUID;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.rigistro.gado.demo.entity.Animal;
 
-@Entity
-@Table(name = "animals")
-public class Animal {
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class AnimalResponseDTO {
   private Long id;
-
-  @Column(nullable = false)
   private String name;
-
-  @Column(nullable = false, unique = true)
   private String numeration;
-
-  @Column(nullable = false)
   private int age;
-
-  @Column(nullable = false)
   private String serie;
-
-  @Column(nullable = false)
   private String breed;
-
-  @Column(nullable = false)
   private String purity;
-
-  @Column(nullable = false, unique = true)
   private String RGD;
-
-  @Column(nullable = false)
   private String sex;
-
-  @ManyToOne
-  @JoinColumn(name = "id_father", referencedColumnName = "id")
-  @JsonBackReference
-  private Animal father;
-
-  @ManyToOne
-  @JoinColumn(name = "id_mother", referencedColumnName = "id")
-  @JsonBackReference
-  private Animal mother;
-
-  @OneToMany(mappedBy = "father", cascade = CascadeType.ALL, orphanRemoval = true)
-  @JsonBackReference
-  private List<Animal> offspringAsFather;
-
-  @OneToMany(mappedBy = "mother", cascade = CascadeType.ALL, orphanRemoval = true)
-  @JsonBackReference
-  private List<Animal> offspringAsMother;
-
-  @Column(name = "last_breeding", nullable = true)
+  private Long fatherId;
+  private Long motherId;
   private LocalDate lastBreeding;
-
-  @Column(name = "birth_date", nullable = false)
   private LocalDate birthDate;
-
-  @Column(name = "registered_with_government", nullable = false)
   private boolean registeredWithGovernment;
-
-  @Column(name = "receive_notifications", nullable = false)
   private boolean receiveNotifications;
-
-  @Column(name = "image_url", nullable = true)
   private String imageUrl;
+  private String motherName;
+  private String fatherName;
 
-  // Getters e Setters
+  public AnimalResponseDTO(Animal animal) {
+    this.id = animal.getId();
+    this.name = animal.getName();
+    this.numeration = animal.getNumeration();
+    this.age = animal.getAge();
+    this.serie = animal.getSerie();
+    this.breed = animal.getBreed();
+    this.purity = animal.getPurity();
+    this.RGD = animal.getRGD();
+    this.sex = animal.getSex();
+    this.lastBreeding = animal.getLastBreeding();
+    this.birthDate = animal.getBirthDate();
+    this.registeredWithGovernment = animal.isRegisteredWithGovernment();
+    this.receiveNotifications = animal.isReceiveNotifications();
+    this.imageUrl = animal.getImageUrl();
+
+    // Informações dos pais, se existirem
+    this.motherId = animal.getMother() != null ? animal.getMother().getId() : null;
+    this.motherName = animal.getMother() != null ? animal.getMother().getName() : null;
+
+    this.fatherId = animal.getFather() != null ? animal.getFather().getId() : null;
+    this.fatherName = animal.getFather() != null ? animal.getFather().getName() : null;
+  }
 
   public Long getId() {
     return id;
@@ -135,8 +108,8 @@ public class Animal {
     return RGD;
   }
 
-  public void setRGD(String RGD) {
-    this.RGD = RGD;
+  public void setRGD(String rGD) {
+    RGD = rGD;
   }
 
   public String getSex() {
@@ -147,36 +120,20 @@ public class Animal {
     this.sex = sex;
   }
 
-  public Animal getFather() {
-    return father;
+  public Long getFatherId() {
+    return fatherId;
   }
 
-  public void setFather(Animal father) {
-    this.father = father;
+  public void setFatherId(Long fatherId) {
+    this.fatherId = fatherId;
   }
 
-  public Animal getMother() {
-    return mother;
+  public Long getMotherId() {
+    return motherId;
   }
 
-  public void setMother(Animal mother) {
-    this.mother = mother;
-  }
-
-  public List<Animal> getOffspringAsFather() {
-    return offspringAsFather;
-  }
-
-  public void setOffspringAsFather(List<Animal> offspringAsFather) {
-    this.offspringAsFather = offspringAsFather;
-  }
-
-  public List<Animal> getOffspringAsMother() {
-    return offspringAsMother;
-  }
-
-  public void setOffspringAsMother(List<Animal> offspringAsMother) {
-    this.offspringAsMother = offspringAsMother;
+  public void setMotherId(Long motherId) {
+    this.motherId = motherId;
   }
 
   public LocalDate getLastBreeding() {
@@ -218,4 +175,21 @@ public class Animal {
   public void setImageUrl(String imageUrl) {
     this.imageUrl = imageUrl;
   }
+
+  public String getMotherName() {
+    return motherName;
+  }
+
+  public void setMotherName(String motherName) {
+    this.motherName = motherName;
+  }
+
+  public String getFatherName() {
+    return fatherName;
+  }
+
+  public void setFatherName(String fatherName) {
+    this.fatherName = fatherName;
+  }
+
 }

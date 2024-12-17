@@ -1,5 +1,6 @@
 package com.rigistro.gado.demo.repository;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,4 +11,10 @@ import com.rigistro.gado.demo.entity.Animal;
 @Repository
 public interface AnimalRepository extends JpaRepository<Animal, Long> {
   boolean existsByName(String name);
+
+  boolean existsByRGD(String RGD);
+
+  boolean existsBySerie(String serie);
+
+  Optional<Animal> findByName(String name);
 }

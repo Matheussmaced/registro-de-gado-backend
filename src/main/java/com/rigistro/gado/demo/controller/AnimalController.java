@@ -12,13 +12,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rigistro.gado.demo.DTO.AnimalResponseDTO;
 import com.rigistro.gado.demo.DTO.CreateAnimalDTO;
 import com.rigistro.gado.demo.entity.Animal;
 
 import com.rigistro.gado.demo.services.AnimalService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/animal")
+@Tag(name = "Animal Controller", description = "Gerencia os registros de animais")
 public class AnimalController {
 
   private final AnimalService animalService;
@@ -28,7 +33,7 @@ public class AnimalController {
   }
 
   @GetMapping()
-  public ResponseEntity<List<Animal>> findAll() {
+  public ResponseEntity<List<AnimalResponseDTO>> findAll() {
     var animals = animalService.findAll();
 
     return ResponseEntity.ok(animals);
@@ -36,13 +41,14 @@ public class AnimalController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Animal> findAnimalById(@PathVariable("id") String id) {
-    var getId = animalService.findById(id);
-
-    return ResponseEntity.ok(getId);
+  @Operation(summary = "Busca um animal por ID", description = "Retorna os detalhes do animal com o ID informado.")
+  public ResponseEntity<AnimalResponseDTO> findById(@PathVariable String id) {
+    Animal animal = animalService.findById(id);
+    return ResponseEntity.ok(new AnimalResponseDTO(animal));
   }
 
   @PostMapping()
+  @Operation(summary = "Cria um novo animal", description = "Adiciona um novo registro de animal ao banco de dados.")
   public ResponseEntity<Animal> createAnimal(@RequestBody CreateAnimalDTO createAnimalDTO) {
     Animal savedAnimal = animalService.createAnimal(createAnimalDTO);
     return ResponseEntity.status(HttpStatus.CREATED).body(savedAnimal);

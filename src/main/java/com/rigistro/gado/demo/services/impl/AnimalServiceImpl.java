@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.rigistro.gado.demo.DTO.AnimalResponseDTO;
 import com.rigistro.gado.demo.DTO.CreateAnimalDTO;
 import com.rigistro.gado.demo.entity.Animal;
 import com.rigistro.gado.demo.repository.AnimalRepository;
@@ -21,8 +22,10 @@ public class AnimalServiceImpl implements AnimalService {
     this.animalRepository = animalRepository;
   }
 
-  public List<Animal> findAll() {
-    return animalRepository.findAll();
+  public List<AnimalResponseDTO> findAll() {
+    return animalRepository.findAll().stream()
+        .map(AnimalResponseDTO::new)
+        .toList();
   }
 
   public Animal findById(String id) {
@@ -61,6 +64,22 @@ public class AnimalServiceImpl implements AnimalService {
     animal.setRegisteredWithGovernment(createAnimalDTO.registeredWithGovernment());
     animal.setReceiveNotifications(createAnimalDTO.receiveNotifications());
     animal.setImageUrl(createAnimalDTO.imageUrl());
+
+    // Associar mãe pelo nome, se fornecido
+    if (createAnimalDTO.motherName() != null && !createAnimalDTO.motherName().isEmpty()) {
+      Animal mother = animalRepository.findByName(createAnimalDTO.motherName())
+          .orElseThrow(
+              () -> new IllegalArgumentException("Mother not found with name: " + createAnimalDTO.motherName()));
+      animal.setMother(mother);
+    }
+
+    // Associar pai pelo nome, se fornecido
+    if (createAnimalDTO.fatherName() != null && !createAnimalDTO.fatherName().isEmpty()) {
+      Animal father = animalRepository.findByName(createAnimalDTO.fatherName())
+          .orElseThrow(
+              () -> new IllegalArgumentException("Father not found with name: " + createAnimalDTO.fatherName()));
+      animal.setFather(father);
+    }
 
     return animalRepository.save(animal);
   }
