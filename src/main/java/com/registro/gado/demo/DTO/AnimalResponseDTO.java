@@ -1,8 +1,8 @@
-package com.rigistro.gado.demo.DTO;
+package com.registro.gado.demo.DTO;
 
 import java.time.LocalDate;
 
-import com.rigistro.gado.demo.entity.Animal;
+import com.registro.gado.demo.entity.Animal;
 
 public class AnimalResponseDTO {
   private Long id;

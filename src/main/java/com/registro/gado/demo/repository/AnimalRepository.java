@@ -1,4 +1,4 @@
-package com.rigistro.gado.demo.repository;
+package com.registro.gado.demo.repository;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -6,7 +6,7 @@ import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.rigistro.gado.demo.entity.Animal;
+import com.registro.gado.demo.entity.Animal;
 
 @Repository
 public interface AnimalRepository extends JpaRepository<Animal, Long> {

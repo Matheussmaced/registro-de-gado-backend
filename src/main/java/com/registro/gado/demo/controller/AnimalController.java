@@ -1,4 +1,4 @@
-package com.rigistro.gado.demo.controller;
+package com.registro.gado.demo.controller;
 
 import java.util.List;
 
@@ -14,12 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rigistro.gado.demo.DTO.AnimalResponseDTO;
-import com.rigistro.gado.demo.DTO.CreateAnimalDTO;
-import com.rigistro.gado.demo.DTO.UpdateAnimalDTO;
-import com.rigistro.gado.demo.entity.Animal;
-
-import com.rigistro.gado.demo.services.AnimalService;
+import com.registro.gado.demo.DTO.AnimalResponseDTO;
+import com.registro.gado.demo.DTO.CreateAnimalDTO;
+import com.registro.gado.demo.DTO.UpdateAnimalDTO;
+import com.registro.gado.demo.entity.Animal;
+import com.registro.gado.demo.services.AnimalService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

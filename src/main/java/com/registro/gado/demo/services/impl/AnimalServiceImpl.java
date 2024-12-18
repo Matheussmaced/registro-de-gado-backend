@@ -1,4 +1,4 @@
-package com.rigistro.gado.demo.services.impl;
+package com.registro.gado.demo.services.impl;
 
 import java.util.List;
 
@@ -7,12 +7,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.rigistro.gado.demo.DTO.AnimalResponseDTO;
-import com.rigistro.gado.demo.DTO.CreateAnimalDTO;
-import com.rigistro.gado.demo.DTO.UpdateAnimalDTO;
-import com.rigistro.gado.demo.entity.Animal;
-import com.rigistro.gado.demo.repository.AnimalRepository;
-import com.rigistro.gado.demo.services.AnimalService;
+import com.registro.gado.demo.DTO.AnimalResponseDTO;
+import com.registro.gado.demo.DTO.CreateAnimalDTO;
+import com.registro.gado.demo.DTO.UpdateAnimalDTO;
+import com.registro.gado.demo.entity.Animal;
+import com.registro.gado.demo.repository.AnimalRepository;
+import com.registro.gado.demo.services.AnimalService;
 
 import jakarta.persistence.EntityNotFoundException;
 

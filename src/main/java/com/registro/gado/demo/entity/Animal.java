@@ -1,4 +1,4 @@
-package com.rigistro.gado.demo.entity;
+package com.registro.gado.demo.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;

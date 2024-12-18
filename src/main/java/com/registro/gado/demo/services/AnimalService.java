@@ -1,13 +1,13 @@
-package com.rigistro.gado.demo.services;
+package com.registro.gado.demo.services;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.rigistro.gado.demo.DTO.AnimalResponseDTO;
-import com.rigistro.gado.demo.DTO.CreateAnimalDTO;
-import com.rigistro.gado.demo.DTO.UpdateAnimalDTO;
-import com.rigistro.gado.demo.entity.Animal;
+import com.registro.gado.demo.DTO.AnimalResponseDTO;
+import com.registro.gado.demo.DTO.CreateAnimalDTO;
+import com.registro.gado.demo.DTO.UpdateAnimalDTO;
+import com.registro.gado.demo.entity.Animal;
 
 @Service
 public interface AnimalService {
