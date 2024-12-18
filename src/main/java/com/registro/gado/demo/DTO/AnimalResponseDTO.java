@@ -12,7 +12,7 @@ public class AnimalResponseDTO {
   private String serie;
   private String breed;
   private String purity;
-  private String RGD;
+  private String RDG;
   private String sex;
   private Long fatherId;
   private Long motherId;
@@ -32,7 +32,7 @@ public class AnimalResponseDTO {
     this.serie = animal.getSerie();
     this.breed = animal.getBreed();
     this.purity = animal.getPurity();
-    this.RGD = animal.getRGD();
+    this.RDG = animal.getRDG();
     this.sex = animal.getSex();
     this.lastBreeding = animal.getLastBreeding();
     this.birthDate = animal.getBirthDate();
@@ -104,12 +104,12 @@ public class AnimalResponseDTO {
     this.purity = purity;
   }
 
-  public String getRGD() {
-    return RGD;
+  public String getRDG() {
+    return RDG;
   }
 
-  public void setRGD(String rGD) {
-    RGD = rGD;
+  public void setRDG(String RDG) {
+    this.RDG = RDG;
   }
 
   public String getSex() {

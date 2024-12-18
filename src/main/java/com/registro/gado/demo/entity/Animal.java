@@ -35,7 +35,7 @@ public class Animal {
   private String purity;
 
   @Column(nullable = false, unique = true)
-  private String RGD;
+  private String RDG;
 
   @Column(nullable = false)
   private String sex;
@@ -131,12 +131,12 @@ public class Animal {
     this.purity = purity;
   }
 
-  public String getRGD() {
-    return RGD;
+  public String getRDG() {
+    return RDG;
   }
 
-  public void setRGD(String RGD) {
-    this.RGD = RGD;
+  public void setRDG(String RDG) {
+    this.RDG = RDG;
   }
 
   public String getSex() {

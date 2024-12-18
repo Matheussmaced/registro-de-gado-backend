@@ -63,8 +63,8 @@ public class AnimalServiceImpl implements AnimalService {
     if (updateAnimalDTO.purity() != null) {
       animalUpdate.setPurity(updateAnimalDTO.purity());
     }
-    if (updateAnimalDTO.RGD() != null) {
-      animalUpdate.setRGD(updateAnimalDTO.RGD());
+    if (updateAnimalDTO.RDG() != null) {
+      animalUpdate.setRDG(updateAnimalDTO.RDG());
     }
     if (updateAnimalDTO.sex() != null) {
       animalUpdate.setSex(updateAnimalDTO.sex());
@@ -131,8 +131,8 @@ public class AnimalServiceImpl implements AnimalService {
       throw new IllegalArgumentException("An animal with this name already exists.");
     }
 
-    if (animalRepository.existsByName(createAnimalDTO.RGD())) {
-      throw new IllegalArgumentException("An animal with this RGD already exists.");
+    if (animalRepository.existsByName(createAnimalDTO.RDG())) {
+      throw new IllegalArgumentException("An animal with this RDG already exists.");
     }
 
     if (animalRepository.existsByName(createAnimalDTO.serie())) {
@@ -146,7 +146,7 @@ public class AnimalServiceImpl implements AnimalService {
     animal.setSerie(createAnimalDTO.serie());
     animal.setBreed(createAnimalDTO.breed());
     animal.setPurity(createAnimalDTO.purity());
-    animal.setRGD(createAnimalDTO.RGD());
+    animal.setRDG(createAnimalDTO.RDG());
     animal.setSex(createAnimalDTO.sex());
     animal.setBirthDate(createAnimalDTO.birthDate());
     animal.setLastBreeding(createAnimalDTO.lastBreeding());
