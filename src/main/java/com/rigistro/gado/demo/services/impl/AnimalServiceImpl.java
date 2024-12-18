@@ -51,7 +51,7 @@ public class AnimalServiceImpl implements AnimalService {
     if (updateAnimalDTO.numeration() != null) {
       animalUpdate.setNumeration(updateAnimalDTO.numeration());
     }
-    if (updateAnimalDTO.age() > 0) { // Supondo que a idade nunca será negativa
+    if (updateAnimalDTO.age() > 0) {
       animalUpdate.setAge(updateAnimalDTO.age());
     }
     if (updateAnimalDTO.serie() != null) {
@@ -104,6 +104,21 @@ public class AnimalServiceImpl implements AnimalService {
 
     animalToDelete = animalRepository.findById(animalId)
         .orElseThrow(() -> new EntityNotFoundException("Animal not found"));
+
+    if (animalToDelete.getOffspringAsFather() != null) {
+      for (Animal offspring : animalToDelete.getOffspringAsFather()) {
+        offspring.setFather(null);
+      }
+    }
+
+    if (animalToDelete.getOffspringAsMother() != null) {
+      for (Animal offspring : animalToDelete.getOffspringAsMother()) {
+        offspring.setMother(null);
+      }
+    }
+
+    animalRepository.saveAll(animalToDelete.getOffspringAsFather());
+    animalRepository.saveAll(animalToDelete.getOffspringAsMother());
 
     animalRepository.delete(animalToDelete);
 

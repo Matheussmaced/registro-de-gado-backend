@@ -50,11 +50,11 @@ public class Animal {
   @JsonBackReference
   private Animal mother;
 
-  @OneToMany(mappedBy = "father", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "father", cascade = CascadeType.ALL)
   @JsonBackReference
   private List<Animal> offspringAsFather;
 
-  @OneToMany(mappedBy = "mother", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "mother", cascade = CascadeType.ALL)
   @JsonBackReference
   private List<Animal> offspringAsMother;
 
