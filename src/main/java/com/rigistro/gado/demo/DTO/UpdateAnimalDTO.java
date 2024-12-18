@@ -2,7 +2,7 @@ package com.rigistro.gado.demo.DTO;
 
 import java.time.LocalDate;
 
-public record CreateAnimalDTO(
+public record UpdateAnimalDTO(
                 String name,
                 String numeration,
                 int age,

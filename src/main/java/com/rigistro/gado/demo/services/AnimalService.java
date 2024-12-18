@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.rigistro.gado.demo.DTO.AnimalResponseDTO;
 import com.rigistro.gado.demo.DTO.CreateAnimalDTO;
+import com.rigistro.gado.demo.DTO.UpdateAnimalDTO;
 import com.rigistro.gado.demo.entity.Animal;
 
 @Service
@@ -16,6 +17,8 @@ public interface AnimalService {
   Animal findById(String id);
 
   Animal createAnimal(CreateAnimalDTO createAnimalDTO);
+
+  Animal updateAnimal(String id, UpdateAnimalDTO updateAnimalDTO);
 
   void delete(String id);
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.rigistro.gado.demo.DTO.AnimalResponseDTO;
 import com.rigistro.gado.demo.DTO.CreateAnimalDTO;
+import com.rigistro.gado.demo.DTO.UpdateAnimalDTO;
 import com.rigistro.gado.demo.entity.Animal;
 import com.rigistro.gado.demo.repository.AnimalRepository;
 import com.rigistro.gado.demo.services.AnimalService;
@@ -35,6 +36,66 @@ public class AnimalServiceImpl implements AnimalService {
 
     return animalRepository.findById(animalId)
         .orElseThrow(() -> new IllegalArgumentException("Animal not found with ID: " + id));
+  }
+
+  public Animal updateAnimal(String id, UpdateAnimalDTO updateAnimalDTO) {
+    var animalId = Long.parseLong(id);
+    Animal animalUpdate;
+
+    animalUpdate = animalRepository.findById(animalId)
+        .orElseThrow(() -> new EntityNotFoundException("Animal not found"));
+
+    if (updateAnimalDTO.name() != null) {
+      animalUpdate.setName(updateAnimalDTO.name());
+    }
+    if (updateAnimalDTO.numeration() != null) {
+      animalUpdate.setNumeration(updateAnimalDTO.numeration());
+    }
+    if (updateAnimalDTO.age() > 0) { // Supondo que a idade nunca será negativa
+      animalUpdate.setAge(updateAnimalDTO.age());
+    }
+    if (updateAnimalDTO.serie() != null) {
+      animalUpdate.setSerie(updateAnimalDTO.serie());
+    }
+    if (updateAnimalDTO.breed() != null) {
+      animalUpdate.setBreed(updateAnimalDTO.breed());
+    }
+    if (updateAnimalDTO.purity() != null) {
+      animalUpdate.setPurity(updateAnimalDTO.purity());
+    }
+    if (updateAnimalDTO.RGD() != null) {
+      animalUpdate.setRGD(updateAnimalDTO.RGD());
+    }
+    if (updateAnimalDTO.sex() != null) {
+      animalUpdate.setSex(updateAnimalDTO.sex());
+    }
+    if (updateAnimalDTO.lastBreeding() != null) {
+      animalUpdate.setLastBreeding(updateAnimalDTO.lastBreeding());
+    }
+    if (updateAnimalDTO.birthDate() != null) {
+      animalUpdate.setBirthDate(updateAnimalDTO.birthDate());
+    }
+
+    animalUpdate.setRegisteredWithGovernment(updateAnimalDTO.registeredWithGovernment());
+    animalUpdate.setReceiveNotifications(updateAnimalDTO.receiveNotifications());
+
+    if (updateAnimalDTO.imageUrl() != null) {
+      animalUpdate.setImageUrl(updateAnimalDTO.imageUrl());
+    }
+    if (updateAnimalDTO.motherName() != null) {
+      Animal mother = animalRepository.findByName(updateAnimalDTO.motherName())
+          .orElseThrow(
+              () -> new EntityNotFoundException("Mother not found with name: " + updateAnimalDTO.motherName()));
+      animalUpdate.setMother(mother);
+    }
+    if (updateAnimalDTO.fatherName() != null) {
+      Animal father = animalRepository.findByName(updateAnimalDTO.fatherName())
+          .orElseThrow(
+              () -> new EntityNotFoundException("Father not found with name: " + updateAnimalDTO.fatherName()));
+      animalUpdate.setFather(father);
+    }
+
+    return animalRepository.save(animalUpdate);
   }
 
   public void delete(String id) {

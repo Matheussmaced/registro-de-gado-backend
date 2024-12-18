@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rigistro.gado.demo.DTO.AnimalResponseDTO;
 import com.rigistro.gado.demo.DTO.CreateAnimalDTO;
+import com.rigistro.gado.demo.DTO.UpdateAnimalDTO;
 import com.rigistro.gado.demo.entity.Animal;
 
 import com.rigistro.gado.demo.services.AnimalService;
@@ -53,6 +55,15 @@ public class AnimalController {
   public ResponseEntity<Animal> createAnimal(@RequestBody CreateAnimalDTO createAnimalDTO) {
     Animal savedAnimal = animalService.createAnimal(createAnimalDTO);
     return ResponseEntity.status(HttpStatus.CREATED).body(savedAnimal);
+  }
+
+  @PutMapping("/{id}")
+  @Operation(summary = "Atualiza um animal existente", description = "Atualiza um animal existente no banco de dados.")
+  public ResponseEntity<Void> updateAnimal(@PathVariable("id") String id,
+      @RequestBody UpdateAnimalDTO updateAnimalDTO) {
+    animalService.updateAnimal(id, updateAnimalDTO);
+
+    return ResponseEntity.noContent().build();
   }
 
   @DeleteMapping("/{id}")
