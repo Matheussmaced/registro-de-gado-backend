@@ -3,10 +3,8 @@ package com.registro.gado.demo.entity;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "animals")
@@ -50,11 +48,11 @@ public class Animal {
   @JsonBackReference
   private Animal mother;
 
-  @OneToMany(mappedBy = "father", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "father", cascade = CascadeType.ALL, orphanRemoval = true)
   @JsonBackReference
   private List<Animal> offspringAsFather;
 
-  @OneToMany(mappedBy = "mother", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "mother", cascade = CascadeType.ALL, orphanRemoval = true)
   @JsonBackReference
   private List<Animal> offspringAsMother;
 

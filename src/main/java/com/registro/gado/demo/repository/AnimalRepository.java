@@ -12,7 +12,7 @@ import com.registro.gado.demo.entity.Animal;
 public interface AnimalRepository extends JpaRepository<Animal, Long> {
   boolean existsByName(String name);
 
-  boolean existsByRDG(String RDG);
+  boolean existsByRDG(String rdg);
 
   boolean existsBySerie(String serie);
 

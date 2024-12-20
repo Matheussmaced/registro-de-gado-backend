@@ -1,11 +1,7 @@
 package com.registro.gado.demo.services.impl;
 
 import java.util.List;
-
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.registro.gado.demo.DTO.AnimalResponseDTO;
 import com.registro.gado.demo.DTO.CreateAnimalDTO;
@@ -131,11 +127,11 @@ public class AnimalServiceImpl implements AnimalService {
       throw new IllegalArgumentException("An animal with this name already exists.");
     }
 
-    if (animalRepository.existsByName(createAnimalDTO.RDG())) {
+    if (animalRepository.existsByRDG(createAnimalDTO.RDG())) {
       throw new IllegalArgumentException("An animal with this RDG already exists.");
     }
 
-    if (animalRepository.existsByName(createAnimalDTO.serie())) {
+    if (animalRepository.existsBySerie(createAnimalDTO.serie())) {
       throw new IllegalArgumentException("An animal with this SERIE already exists.");
     }
 
