@@ -10,7 +10,7 @@ public class CorsConfig implements WebMvcConfigurer {
   public void addCorsMappings(CorsRegistry registry) {
     System.out.println("Configuração de CORS carregada");
     registry.addMapping("/**")
-        .allowedOrigins("http://localhost:4200")
+        .allowedOrigins("http://localhost:4200", "https://sistema-gado-registro.vercel.app")
         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
         .allowedHeaders("*")
         .allowCredentials(true);
